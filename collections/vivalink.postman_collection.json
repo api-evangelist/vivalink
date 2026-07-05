@@ -1,0 +1,159 @@
+{
+  "info": {
+    "name": "VivaLNK Biometrics Data Platform API (Modeled)",
+    "description": "MODELED Postman collection for the VivaLNK (Vivalink) Biometrics Data Platform cloud API for remote patient monitoring. VivaLNK's developer surface is partner-gated (SDK + Developer Program); these requests are modeled from documented capabilities (M2M cloud web services, webhook support, FHIR support, bulk data-file export) and are not copied from a public reference. Base URL and auth must be confirmed against VivaLNK's licensed documentation.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      { "key": "token", "value": "{{accessToken}}", "type": "string" }
+    ]
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "https://api.vivalink.com", "type": "string" },
+    { "key": "accessToken", "value": "", "type": "string" }
+  ],
+  "item": [
+    {
+      "name": "Subjects",
+      "item": [
+        {
+          "name": "List subjects",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/v1/subjects", "host": ["{{baseUrl}}"], "path": ["v1", "subjects"] },
+            "description": "Lists enrolled subjects (modeled)."
+          }
+        },
+        {
+          "name": "Create a subject",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"externalId\": \"\",\n  \"projectId\": \"\"\n}" },
+            "url": { "raw": "{{baseUrl}}/v1/subjects", "host": ["{{baseUrl}}"], "path": ["v1", "subjects"] },
+            "description": "Enrolls a new subject (modeled)."
+          }
+        },
+        {
+          "name": "Retrieve a subject",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/v1/subjects/:subjectId", "host": ["{{baseUrl}}"], "path": ["v1", "subjects", ":subjectId"] },
+            "description": "Retrieves a subject by ID (modeled)."
+          }
+        },
+        {
+          "name": "Retrieve subject measurements",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v1/subjects/:subjectId/measurements?metric=heart_rate&start=&end=",
+              "host": ["{{baseUrl}}"],
+              "path": ["v1", "subjects", ":subjectId", "measurements"],
+              "query": [
+                { "key": "metric", "value": "heart_rate" },
+                { "key": "start", "value": "" },
+                { "key": "end", "value": "" }
+              ]
+            },
+            "description": "Retrieves time-ranged biometric measurements (ECG-derived HR, HRV, RR interval, respiratory rate, temperature, SpO2, BP, activity) for a subject (modeled)."
+          }
+        },
+        {
+          "name": "Request a bulk data-file export",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"start\": \"\",\n  \"end\": \"\",\n  \"format\": \"csv\"\n}" },
+            "url": { "raw": "{{baseUrl}}/v1/subjects/:subjectId/exports", "host": ["{{baseUrl}}"], "path": ["v1", "subjects", ":subjectId", "exports"] },
+            "description": "Requests a bulk export of a subject's raw biometric data (modeled)."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Devices",
+      "item": [
+        {
+          "name": "List devices",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/v1/devices", "host": ["{{baseUrl}}"], "path": ["v1", "devices"] },
+            "description": "Lists VivaLNK wearable biosensors (modeled)."
+          }
+        },
+        {
+          "name": "Retrieve a device",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/v1/devices/:deviceId", "host": ["{{baseUrl}}"], "path": ["v1", "devices", ":deviceId"] },
+            "description": "Retrieves a device by ID (modeled)."
+          }
+        },
+        {
+          "name": "Assign a device to a subject",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"subjectId\": \"\"\n}" },
+            "url": { "raw": "{{baseUrl}}/v1/devices/:deviceId/assignment", "host": ["{{baseUrl}}"], "path": ["v1", "devices", ":deviceId", "assignment"] },
+            "description": "Assigns a device to a subject (modeled)."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Webhooks",
+      "item": [
+        {
+          "name": "List webhook subscriptions",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/v1/webhooks", "host": ["{{baseUrl}}"], "path": ["v1", "webhooks"] },
+            "description": "Lists webhook subscriptions (modeled)."
+          }
+        },
+        {
+          "name": "Create a webhook subscription",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"url\": \"https://example.com/vivalink/webhook\",\n  \"events\": [\"measurement.created\", \"alert.arrhythmia\"]\n}" },
+            "url": { "raw": "{{baseUrl}}/v1/webhooks", "host": ["{{baseUrl}}"], "path": ["v1", "webhooks"] },
+            "description": "Registers an HTTPS endpoint to receive pushed biometric data and alert events (modeled)."
+          }
+        }
+      ]
+    },
+    {
+      "name": "FHIR",
+      "item": [
+        {
+          "name": "Search FHIR Observations",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/fhir/Observation?patient=&code=",
+              "host": ["{{baseUrl}}"],
+              "path": ["fhir", "Observation"],
+              "query": [
+                { "key": "patient", "value": "" },
+                { "key": "code", "value": "" }
+              ]
+            },
+            "description": "Returns biometric measurements as HL7 FHIR R4 Observation resources (modeled)."
+          }
+        }
+      ]
+    }
+  ]
+}

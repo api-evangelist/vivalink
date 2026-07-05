@@ -1,0 +1,100 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: VivaLNK
+providerId: vivalink
+created: '2026-07-05'
+modified: '2026-07-05'
+reconciled: false
+tags:
+- Connected Health
+- Remote Patient Monitoring
+- Wearables
+- Biometrics
+- FinOps
+- Cost Management
+- FOCUS
+description: >-
+  FinOps view of VivaLNK (Vivalink) spend. VivaLNK is a commercial,
+  contact-sales connected-health vendor: cost is a blend of hardware
+  (medical-grade wearable biosensors and disposable adhesives), the Biometrics
+  Data Platform / cloud data services (scoped by subjects, devices, and data
+  volume), and SDK / Developer Program licensing for API access. There is no
+  public list price or self-service tier, so per-unit rates are not reconciled
+  here. Dominant cost drivers are the number of monitored subjects, the number
+  and type of deployed sensors, disposables consumed over time, and the volume
+  of biometric data ingested, stored, and exported.
+notes: >-
+  Obtain quoted rates through VivaLNK's sales flow. For clinical-trial and RPM
+  programs, disposables and per-subject platform fees typically dominate
+  recurring cost; API/SDK licensing is governed by the Developer Program.
+sources:
+- https://www.vivalink.com/vivalink-sdk
+- https://www.vivalink.com/vitals-data-services
+- https://www.vivalink.com/contact
+- https://focus.finops.org/focus-specification/v1-3/
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+publisherName: VivaLNK
+serviceCategory: Connected Health and Remote Patient Monitoring
+billingModel:
+  pricingCategory: Contract-Based
+  billingFrequency: Custom
+  billingCurrency: USD
+  chargeCategories:
+  - Purchase
+  - Usage
+  - Adjustment
+focusColumns:
+  ServiceName: VivaLNK Biometrics Data Platform
+  ServiceCategory: Connected Health and Remote Patient Monitoring
+  ProviderName: VivaLNK
+  PublisherName: VivaLNK
+  InvoiceIssuerName: VivaLNK
+  BillingCurrency: USD
+  ChargeCategory: Usage
+  PricingCategory: Contract-Based
+meters:
+- name: monitored_subjects
+  description: Number of subjects (patients / participants) enrolled and monitored on the platform.
+  unit: subjects
+  aggregation: max
+  dimensions:
+  - account
+  - project
+- name: deployed_devices
+  description: Number of VivaLNK wearable biosensors deployed, by type (ECG, temperature, SpO2, BP).
+  unit: devices
+  aggregation: max
+  dimensions:
+  - account
+  - device_type
+- name: disposables
+  description: Disposable adhesives / consumables used with reusable sensors over time.
+  unit: units
+  aggregation: sum
+  dimensions:
+  - account
+- name: data_volume
+  description: Volume of biometric data ingested, stored, and exported through the platform.
+  unit: bytes
+  aggregation: sum
+  dimensions:
+  - account
+  - project
+principles:
+- name: Visibility
+  description: Track per-subject and per-device counts, disposable consumption, and data-volume ingested/exported against the account agreement.
+- name: Allocation
+  description: Scope subjects and devices to projects/studies so cost maps to programs, trials, or care lines.
+- name: Optimization
+  description: Right-size sensor mix and sampling to the clinical need; scope bulk exports and retention to what is required; reuse sensors with disposables to lower per-subject cost.
+- name: Accountability
+  description: Assign owners per project/study; review recurring platform and disposable spend against enrollment.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

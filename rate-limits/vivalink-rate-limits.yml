@@ -1,0 +1,68 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: VivaLNK
+providerId: vivalink
+created: '2026-07-05'
+modified: '2026-07-05'
+reconciled: false
+tags:
+- Connected Health
+- Remote Patient Monitoring
+- Wearables
+- Biometrics
+- Rate Limiting
+- Quotas
+description: >-
+  VivaLNK does not publish fixed numeric rate limits for its Biometrics Data
+  Platform / cloud web-service (M2M) APIs; the licensed API reference and any
+  quota terms are provided under the partner-gated Developer Program. The
+  platform runs on AWS (Amazon API Gateway plus Amazon Kinesis Data Streams),
+  so ingestion and near-real-time access throughput are governed by the
+  provisioned capacity and account agreement rather than a published per-minute
+  cap. Data-plane delivery to webhook subscribers is push-based and paced by
+  the volume of measurements and alerts produced by the enrolled wearables.
+notes: >-
+  Numeric per-account or per-endpoint limits are not documented publicly as of
+  the review date. Confirm quotas, burst limits, and any 429 behavior in
+  VivaLNK's licensed Developer Program documentation.
+sources:
+- https://www.vivalink.com/vivalink-sdk
+- https://www.vivalink.com/vitals-data-services
+- https://aws.amazon.com/blogs/apn/next-gen-patient-monitoring-with-vivalinks-intelligent-biometrics-platform-and-aws/
+responseCodes:
+  throttled: 429
+limits:
+- name: Cloud API Requests
+  scope: account
+  metric: requests
+  limit: not published
+  notes: No fixed numeric request-rate limit is documented for the M2M cloud APIs.
+- name: Ingestion Throughput
+  scope: account
+  metric: records
+  limit: provisioned
+  notes: Sensor-to-cloud ingestion runs through Amazon API Gateway and Amazon Kinesis; throughput is governed by provisioned capacity and the account agreement.
+- name: Near-Real-Time Read
+  scope: account
+  metric: requests
+  limit: not published
+  notes: Near-real-time measurement reads are served over REST; no public cap is documented.
+- name: Webhook Delivery
+  scope: subscription
+  metric: events
+  limit: event-driven
+  notes: Webhook events are pushed as measurements and alerts are produced; volume depends on the number of enrolled subjects and devices.
+- name: Bulk Export
+  scope: account
+  metric: jobs
+  limit: not published
+  notes: Bulk data-file export is asynchronous; concurrency limits are not documented publicly.
+policies:
+- name: Backoff Strategy
+  description: Clients should implement exponential backoff with jitter and honor Retry-After on any 429 responses.
+- name: Provisioned Capacity
+  description: Platform throughput is scaled to the account's deployment (subjects, devices, data volume) rather than a fixed global limit.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

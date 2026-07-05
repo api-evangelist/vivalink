@@ -1,0 +1,123 @@
+aid: vivalink
+name: VivaLNK
+review:
+  question: Does VivaLNK expose a documented public WebSocket API?
+  answer: false
+  date: '2026-07-05'
+  reviewer: API Evangelist
+  asyncapiSpecCreated: false
+  asyncapiScopeNote: |
+    No AsyncAPI document was authored. VivaLNK's documented cloud surface is
+    request/response REST over HTTPS (Amazon API Gateway) plus server-to-endpoint
+    webhook push; near-real-time delivery is handled internally by Amazon Kinesis
+    Data Streams and surfaced to partners over REST, not a client-facing
+    WebSocket or SSE stream. There is no documented public server-push socket on
+    VivaLNK's own API to model, and the full API reference is partner-gated, so
+    no AsyncAPI was created.
+findings:
+  summary: |
+    VivaLNK (Vivalink) does not publish a documented public WebSocket API.
+    VivaLNK is a connected-health company: medical-grade wearable biosensors
+    (Multi-Vital ECG patch, temperature patch, SpO2 sensor, BP cuff) plus a
+    Biometrics Data Platform for remote patient monitoring, hospital-at-home,
+    and decentralized clinical trials. Mobile edge clients read the sensors over
+    Bluetooth Low Energy (BLE) and deliver data to the cloud over RESTful HTTPS
+    services. Per VivaLNK's own material and the AWS Partner Network blog, the
+    cloud is built on Amazon API Gateway (secure entry point), Amazon Kinesis
+    Data Streams (near-real-time capture), Amazon Kinesis Data Analytics, and
+    Amazon S3. Partner/developer access is delivered through the SDK and
+    Developer Program and includes M2M cloud web-service (REST) APIs, webhook
+    push, HL7 FHIR integration, and bulk data-file downloads. No realtime,
+    bidirectional WebSocket (ws:// or wss://) endpoint is documented anywhere in
+    VivaLNK's public material as of the review date.
+  gatedNote: |
+    VivaLNK's developer surface is PARTNER-GATED. The SDK, sample apps, and the
+    full cloud API reference are provided under the Developer Program / developer
+    license terms rather than published openly. No public base URL, OpenAPI
+    document, or endpoint reference is available. Access and pricing are
+    contact-sales. The API entries in apis.yml and the OpenAPI/collections in
+    this repo are MODELED from VivaLNK's documented platform capabilities
+    (M2M cloud web services, webhook support, FHIR support, bulk export); they
+    are labeled modeled throughout and the base URL (https://api.vivalink.com)
+    is a placeholder to be confirmed under license.
+  transports:
+    - protocol: REST
+      scheme: https
+      baseURL: https://api.vivalink.com
+      documented: true
+      confirmedBaseURL: false
+      note: M2M cloud web services over HTTPS via Amazon API Gateway. Base URL is modeled/placeholder; actual host is provided under the Developer Program.
+    - protocol: Webhook
+      scheme: https
+      documented: true
+      note: VivaLNK Biometrics Data Platform documents webhook support - server-to-endpoint HTTPS push of data and alert events. Not WebSocket.
+    - protocol: FHIR
+      scheme: https
+      documented: true
+      note: HL7 FHIR support documented for EHR/CTMS interoperability. REST-based, not WebSocket.
+    - protocol: Bulk File Export
+      scheme: https
+      documented: true
+      note: Simple data-file downloads for retrospective analysis. Not WebSocket.
+    - protocol: WebSocket
+      scheme: wss
+      documented: false
+      note: No WebSocket endpoint is documented in any VivaLNK public material. Near-real-time is served over REST (backed by Amazon Kinesis), not a client-facing socket.
+  endpointsConfirmed: []
+  endpointsModeled:
+    - GET    https://api.vivalink.com/v1/subjects
+    - POST   https://api.vivalink.com/v1/subjects
+    - GET    https://api.vivalink.com/v1/subjects/{subjectId}
+    - PATCH  https://api.vivalink.com/v1/subjects/{subjectId}
+    - DELETE https://api.vivalink.com/v1/subjects/{subjectId}
+    - GET    https://api.vivalink.com/v1/devices
+    - GET    https://api.vivalink.com/v1/devices/{deviceId}
+    - PUT    https://api.vivalink.com/v1/devices/{deviceId}/assignment
+    - DELETE https://api.vivalink.com/v1/devices/{deviceId}/assignment
+    - GET    https://api.vivalink.com/v1/subjects/{subjectId}/measurements
+    - POST   https://api.vivalink.com/v1/subjects/{subjectId}/exports
+    - GET    https://api.vivalink.com/v1/webhooks
+    - POST   https://api.vivalink.com/v1/webhooks
+    - GET    https://api.vivalink.com/v1/webhooks/{webhookId}
+    - DELETE https://api.vivalink.com/v1/webhooks/{webhookId}
+    - GET    https://api.vivalink.com/fhir/Observation
+  dataTypes:
+    - ECG waveform
+    - Heart rate
+    - Heart rate variability (HRV)
+    - RR interval
+    - Respiratory rate
+    - Body / axillary temperature
+    - SpO2
+    - Blood pressure
+    - Three-axis accelerometer / activity
+sources:
+  - url: https://www.vivalink.com/vitals-data-services
+    type: Documentation
+    note: IoT platform / cloud data services; M2M cloud access, FHIR support, webhook support, data-file downloads.
+  - url: https://www.vivalink.com/vivalink-sdk
+    type: Documentation
+    note: SDK includes wearable sensors, software libraries and APIs, sample app/source, docs and support. Partner/Developer Program access.
+  - url: https://aws.amazon.com/blogs/apn/next-gen-patient-monitoring-with-vivalinks-intelligent-biometrics-platform-and-aws/
+    type: Documentation
+    note: Architecture - BLE edge to cloud over RESTful HTTPS; Amazon API Gateway, Amazon Kinesis Data Streams (near-real-time), Kinesis Data Analytics, Amazon S3. No WebSocket.
+  - url: https://www.vivalink.com/vivalink-faq
+    type: Documentation
+    note: Two data-access paths (device-direct or cloud service); dev kit gives control via mobile apps or M2M cloud APIs; near-real-time continuous stream over the network.
+  - url: https://github.com/VivaLnk
+    type: SourceCode
+    note: Org holds product/app repos (VitalScout, FeverScout, ble-android); no cloud API reference or OpenAPI published.
+  - url: https://www.vivalink.com/developer-license-terms
+    type: Documentation
+    note: Developer license terms governing partner-gated API/SDK access.
+actions:
+  asyncapiPath: null
+  apisYmlUpdated: true
+  reason: |
+    No WebSocket protocol surface exists on VivaLNK's own API. The documented
+    cloud surface is request/response REST plus webhook push, with FHIR and bulk
+    file export; near-real-time is handled internally by Amazon Kinesis and read
+    back over REST. No AsyncAPI document was created because there is no
+    documented client-facing server-push transport (WebSocket or SSE) to model,
+    and the full reference is partner-gated. The entry documents the provider
+    honestly with modeled REST/webhook/FHIR endpoints clearly labeled as modeled.

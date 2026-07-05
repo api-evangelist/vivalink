@@ -1,0 +1,108 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: VivaLNK
+providerId: vivalink
+created: '2026-07-05'
+modified: '2026-07-05'
+reconciled: false
+tags:
+- Connected Health
+- Remote Patient Monitoring
+- Wearables
+- Biometrics
+- Plans
+description: >-
+  VivaLNK does not publish list pricing for its wearable biosensors, Biometrics
+  Data Platform, or Developer Program. Access is sold as a commercial,
+  contact-sales engagement - typically a combination of hardware (medical-grade
+  wearable sensors and disposables), platform/cloud data services, and SDK /
+  Developer Program licensing. Deployments are scoped to the use case (remote
+  patient monitoring, hospital-at-home, or decentralized clinical trials) and
+  the number of subjects, devices, and data volume. All figures here are
+  modeled buckets, not quoted rates.
+notes: >-
+  There is no public self-service tier or published price. Obtain a quote and
+  the licensed API reference through VivaLNK's contact/sales flow. The
+  Developer Program governs API access and is partner-gated.
+sources:
+- https://www.vivalink.com/vivalink-sdk
+- https://www.vivalink.com/vitals-data-services
+- https://www.vivalink.com/contact
+- https://www.vivalink.com/developer-license-terms
+plans:
+- id: vivalink-developer-program
+  name: Developer Program / SDK
+  type: enterprise
+  description: >-
+    Licensed access to the VivaLNK SDK, sample apps, cloud web-service (M2M)
+    APIs, webhook and FHIR integration, and technical support. Partner-gated;
+    granted under the developer license terms. Pricing is quoted per
+    engagement.
+  entries:
+  - label: Developer Program License
+    name: developer_program
+    type: flat
+    metric: contract
+    limit: -1
+    timeFrame: year
+    geo: global
+    unit: 1
+    price: contact sales
+    userMultiplied: false
+  elements:
+  - name: SDK and Sample Apps
+  - name: M2M Cloud APIs
+  - name: Webhook Support
+  - name: FHIR Integration
+  - name: Technical Support
+- id: vivalink-data-platform
+  name: Biometrics Data Platform
+  type: enterprise
+  description: >-
+    Managed cloud data platform for ingesting, storing, and accessing biometric
+    data from VivaLNK wearables, scoped by number of subjects, devices, and data
+    volume. Includes near-real-time REST access, bulk data-file export, and
+    EHR/CTMS interoperability. Quoted per deployment.
+  entries:
+  - label: Platform Subscription
+    name: data_platform
+    type: usage
+    metric: subjects
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: contact sales (scoped by subjects, devices, and data volume)
+    userMultiplied: false
+  elements:
+  - name: Cloud Data Ingestion
+  - name: Near-Real-Time REST Access
+  - name: Bulk Data-File Export
+  - name: EHR / CTMS Interoperability
+- id: vivalink-enterprise
+  name: Enterprise / Clinical Trials
+  type: enterprise
+  description: >-
+    Custom enterprise agreement for large RPM programs, hospital-at-home
+    deployments, and decentralized clinical trials, including regulatory
+    support (FDA, HIPAA, GDPR, 21 CFR Part 11, ISO 13485), SLAs, and negotiated
+    volume terms.
+  entries:
+  - label: Enterprise Agreement
+    name: enterprise
+    type: flat
+    metric: contract
+    limit: -1
+    timeFrame: year
+    geo: global
+    unit: 1
+    price: contact sales
+    userMultiplied: false
+  elements:
+  - name: Custom Volume Pricing
+  - name: Regulatory and Compliance Support
+  - name: SLAs and Support
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
