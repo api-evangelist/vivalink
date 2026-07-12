@@ -166,6 +166,10 @@ apis:
     applications. FHIR support is a documented VivaLNK Biometrics Data Platform
     capability; the resource paths here are modeled on standard FHIR R4.
 common:
+- type: DomainSecurity
+  url: security/vivalink-domain-security.yml
+- type: Authentication
+  url: authentication/vivalink-authentication.yml
 - type: GitHubOrganization
   url: https://github.com/VivaLnk
 - type: LinkedIn

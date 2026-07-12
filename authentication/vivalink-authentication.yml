@@ -1,0 +1,15 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/vivalink-openapi.yml
+summary:
+  types:
+  - http
+schemes:
+- name: bearerAuth
+  type: http
+  scheme: bearer
+  description: Modeled as an OAuth2/bearer access token issued to Developer Program partners
+    for machine-to-machine access. Confirm the exact scheme (API key vs. OAuth2 client credentials)
+    against VivaLNK's licensed docs.
+  sources:
+  - openapi/vivalink-openapi.yml
