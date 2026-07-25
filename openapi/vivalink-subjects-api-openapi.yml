@@ -1,0 +1,182 @@
+openapi: 3.0.3
+info:
+  title: VivaLNK Biometrics Data Platform API (Modeled) Devices Subjects API
+  description: 'A modeled OpenAPI description of the VivaLNK (Vivalink) Biometrics Data Platform cloud API for remote patient monitoring. VivaLNK provides medical-grade wearable biosensors (Multi-Vital ECG patch, temperature patch, SpO2 sensor, BP cuff) and a cloud platform that ingests their data over RESTful HTTPS services (Amazon API Gateway plus Amazon Kinesis for near-real-time ingestion) and makes it available for machine-to-machine (M2M) integration, webhook push, FHIR interoperability, and bulk file export.
+
+    IMPORTANT: VivaLNK''s developer surface is delivered through its SDK and Developer Program and is partner-gated - the full API reference is provided under license rather than published openly. The paths, base URL, request parameters, and schemas below are MODELED from VivaLNK''s documented platform capabilities (M2M cloud web services, webhook support, FHIR support, data-file downloads) and are NOT copied from a public reference. Field names, the exact base URL, and authentication scheme must be confirmed against VivaLNK''s licensed documentation before use.'
+  version: 1.0-modeled
+  contact:
+    name: VivaLNK (Vivalink)
+    url: https://www.vivalink.com
+  x-status: modeled
+  x-endpoints-confirmed: false
+  x-source-notes: 'Confirmed via VivaLNK marketing/technical pages and the AWS Partner Network blog: REST over HTTPS, Amazon API Gateway, Amazon Kinesis Data Streams for near-real-time access, M2M cloud APIs, webhook support, FHIR support, and bulk data-file downloads. No public WebSocket API is documented.'
+servers:
+- url: https://api.vivalink.com
+  description: Modeled base URL (partner-gated; actual host provided under the Developer Program)
+security:
+- bearerAuth: []
+tags:
+- name: Subjects
+  description: Subjects (patients / study participants) enrolled for monitoring.
+paths:
+  /v1/subjects:
+    get:
+      operationId: listSubjects
+      tags:
+      - Subjects
+      summary: List subjects
+      description: Lists subjects enrolled in your account, project, or study (modeled).
+      parameters:
+      - name: projectId
+        in: query
+        schema:
+          type: string
+        description: Filter subjects by project or study.
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          default: 50
+      - name: cursor
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A page of subjects.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Subject'
+                  cursor:
+                    type: string
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: createSubject
+      tags:
+      - Subjects
+      summary: Create a subject
+      description: Enrolls a new subject for monitoring (modeled).
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SubjectInput'
+      responses:
+        '201':
+          description: The created subject.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Subject'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /v1/subjects/{subjectId}:
+    parameters:
+    - name: subjectId
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: getSubject
+      tags:
+      - Subjects
+      summary: Retrieve a subject
+      responses:
+        '200':
+          description: The subject.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Subject'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    patch:
+      operationId: updateSubject
+      tags:
+      - Subjects
+      summary: Update a subject
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SubjectInput'
+      responses:
+        '200':
+          description: The updated subject.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Subject'
+    delete:
+      operationId: deactivateSubject
+      tags:
+      - Subjects
+      summary: Deactivate a subject
+      responses:
+        '204':
+          description: Subject deactivated.
+components:
+  schemas:
+    Subject:
+      type: object
+      properties:
+        id:
+          type: string
+        externalId:
+          type: string
+        projectId:
+          type: string
+        status:
+          type: string
+          enum:
+          - active
+          - inactive
+        createdAt:
+          type: string
+          format: date-time
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+    SubjectInput:
+      type: object
+      properties:
+        externalId:
+          type: string
+        projectId:
+          type: string
+        metadata:
+          type: object
+          additionalProperties: true
+  responses:
+    Unauthorized:
+      description: Missing or invalid credentials.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Modeled as an OAuth2/bearer access token issued to Developer Program partners for machine-to-machine access. Confirm the exact scheme (API key vs. OAuth2 client credentials) against VivaLNK's licensed docs.
