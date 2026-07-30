@@ -18,7 +18,20 @@ description: >-
   the full API reference is provided under license rather than published
   openly, so the endpoints described here are modeled from VivaLNK's documented
   platform capabilities.
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/vivalink.png
 tags:
 - Connected Health
 - Remote Patient Monitoring
@@ -35,136 +48,121 @@ created: '2026-07-05'
 modified: '2026-07-05'
 specificationVersion: '0.19'
 apis:
-- aid: vivalink:vivalink-subjects-api
-  name: VivaLNK Subjects API
-  tags:
-  - Subjects
-  - Patients
-  - Enrollment
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://www.vivalink.com/vitals-data-services
-  baseURL: https://api.vivalink.com
-  properties:
-  - url: https://www.vivalink.com/vivalink-sdk
-    type: Documentation
-  - url: https://www.vivalink.com/vitals-data-services
-    type: Documentation
-  - url: openapi/vivalink-openapi.yml
-    type: OpenAPI
-  - url: collections/vivalink.postman_collection.json
-    type: PostmanCollection
-  - url: collections/vivalink.opencollection.json
-    type: OpenCollection
-  description: >-
-    Enroll and manage the subjects (patients / study participants) whose
-    biometric data is captured by VivaLNK wearables - create, list, retrieve,
-    update, and deactivate subjects, and associate them with a project, study,
-    or care program. Endpoints are modeled from VivaLNK's documented M2M cloud
-    web-service platform; the licensed reference is partner-gated.
 - aid: vivalink:vivalink-devices-api
   name: VivaLNK Devices API
+  description: VivaLNK wearable biosensors and their assignment to subjects.
+  humanURL: https://www.vivalink.com/vitals-data-services
+  baseURL: https://api.vivalink.com
   tags:
   - Devices
-  - Sensors
-  - Wearables
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://www.vivalink.com/wearable-products
-  baseURL: https://api.vivalink.com
   properties:
-  - url: https://www.vivalink.com/vivalink-sdk
-    type: Documentation
-  - url: https://www.vivalink.com/wearable-products
-    type: Documentation
-  - url: openapi/vivalink-openapi.yml
-    type: OpenAPI
-  - url: collections/vivalink.postman_collection.json
-    type: PostmanCollection
-  - url: collections/vivalink.opencollection.json
-    type: OpenCollection
-  description: >-
-    Register and manage VivaLNK wearable biosensors - the Multi-Vital ECG
-    patch, temperature patch, SpO2 sensor, and BP cuff - list devices, retrieve
-    a device's status and firmware, and assign or unassign a device to a
-    subject. Endpoints are modeled from VivaLNK's documented device-management
-    capabilities.
-- aid: vivalink:vivalink-vital-signs-api
-  name: VivaLNK Vital Signs Data API
-  tags:
-  - Vital Signs
-  - ECG
-  - Heart Rate
-  - Temperature
-  - SpO2
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://www.vivalink.com/vitals-data-services
-  baseURL: https://api.vivalink.com
-  properties:
-  - url: https://www.vivalink.com/vitals-data-services
-    type: Documentation
-  - url: https://aws.amazon.com/blogs/apn/next-gen-patient-monitoring-with-vivalinks-intelligent-biometrics-platform-and-aws/
-    type: Documentation
-  - url: openapi/vivalink-openapi.yml
-    type: OpenAPI
-  - url: collections/vivalink.postman_collection.json
-    type: PostmanCollection
-  - url: collections/vivalink.opencollection.json
-    type: OpenCollection
-  description: >-
-    Retrieve continuous and summary biometric measurements collected from
-    subjects' wearables - ECG waveform, heart rate, heart rate variability,
-    RR interval, respiratory rate, body/axillary temperature, SpO2, blood
-    pressure, and accelerometer/activity data - as time-ranged time series or
-    aggregated summaries, plus bulk data-file exports for retrospective
-    analysis. Near-real-time access is served over REST (backed by Amazon
-    Kinesis) rather than a public streaming socket. Endpoints are modeled from
-    VivaLNK's documented cloud data services.
-- aid: vivalink:vivalink-webhooks-api
-  name: VivaLNK Webhooks API
-  tags:
-  - Webhooks
-  - Subscriptions
-  - Events
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://www.vivalink.com/vitals-data-services
-  baseURL: https://api.vivalink.com
-  properties:
-  - url: https://www.vivalink.com/vitals-data-services
-    type: Documentation
-  - url: openapi/vivalink-openapi.yml
-    type: OpenAPI
-  - url: collections/vivalink.postman_collection.json
-    type: PostmanCollection
-  - url: collections/vivalink.opencollection.json
-    type: OpenCollection
-  description: >-
-    Register webhook subscriptions so VivaLNK's platform pushes biometric data
-    and alert events (for example threshold or arrhythmia notifications) to your
-    HTTPS endpoint as they are produced - create, list, retrieve, update, and
-    delete subscriptions. Webhook push is a documented VivaLNK Biometrics Data
-    Platform capability; the endpoint shapes here are modeled.
+  - type: OpenAPI
+    url: openapi/vivalink-devices-api-openapi.yml
+  - type: Documentation
+    url: https://www.vivalink.com/vivalink-sdk
+  - type: Documentation
+    url: https://www.vivalink.com/vitals-data-services
+  - type: PostmanCollection
+    url: collections/vivalink.postman_collection.json
+  - type: OpenCollection
+    url: collections/vivalink.opencollection.json
+  - type: Documentation
+    url: https://www.vivalink.com/wearable-products
+  - type: Documentation
+    url: >-
+      https://aws.amazon.com/blogs/apn/next-gen-patient-monitoring-with-vivalinks-intelligent-biometrics-platform-and-aws/
 - aid: vivalink:vivalink-fhir-api
   name: VivaLNK FHIR API
+  description: HL7 FHIR R4 resources for EHR/CTMS interoperability.
+  humanURL: https://www.vivalink.com/vitals-data-services
+  baseURL: https://api.vivalink.com
   tags:
   - FHIR
-  - Interoperability
-  - EHR
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://www.vivalink.com/vitals-data-services
-  baseURL: https://api.vivalink.com/fhir
   properties:
-  - url: https://www.vivalink.com/vitals-data-services
-    type: Documentation
-  - url: openapi/vivalink-openapi.yml
-    type: OpenAPI
-  - url: collections/vivalink.postman_collection.json
-    type: PostmanCollection
-  - url: collections/vivalink.opencollection.json
-    type: OpenCollection
-  description: >-
-    Access VivaLNK biometric data as HL7 FHIR resources (Patient, Device,
-    Observation) for interoperability with EHR systems, CTMS, and clinical
-    applications. FHIR support is a documented VivaLNK Biometrics Data Platform
-    capability; the resource paths here are modeled on standard FHIR R4.
+  - type: OpenAPI
+    url: openapi/vivalink-fhir-api-openapi.yml
+  - type: Documentation
+    url: https://www.vivalink.com/vivalink-sdk
+  - type: Documentation
+    url: https://www.vivalink.com/vitals-data-services
+  - type: PostmanCollection
+    url: collections/vivalink.postman_collection.json
+  - type: OpenCollection
+    url: collections/vivalink.opencollection.json
+  - type: Documentation
+    url: https://www.vivalink.com/wearable-products
+  - type: Documentation
+    url: >-
+      https://aws.amazon.com/blogs/apn/next-gen-patient-monitoring-with-vivalinks-intelligent-biometrics-platform-and-aws/
+- aid: vivalink:vivalink-subjects-api
+  name: VivaLNK Subjects API
+  description: Subjects (patients / study participants) enrolled for monitoring.
+  humanURL: https://www.vivalink.com/vitals-data-services
+  baseURL: https://api.vivalink.com
+  tags:
+  - Subjects
+  properties:
+  - type: OpenAPI
+    url: openapi/vivalink-subjects-api-openapi.yml
+  - type: Documentation
+    url: https://www.vivalink.com/vivalink-sdk
+  - type: Documentation
+    url: https://www.vivalink.com/vitals-data-services
+  - type: PostmanCollection
+    url: collections/vivalink.postman_collection.json
+  - type: OpenCollection
+    url: collections/vivalink.opencollection.json
+  - type: Documentation
+    url: https://www.vivalink.com/wearable-products
+  - type: Documentation
+    url: >-
+      https://aws.amazon.com/blogs/apn/next-gen-patient-monitoring-with-vivalinks-intelligent-biometrics-platform-and-aws/
+- aid: vivalink:vivalink-vital-signs-api
+  name: VivaLNK Vital Signs API
+  description: Biometric measurements captured from wearables.
+  humanURL: https://www.vivalink.com/vitals-data-services
+  baseURL: https://api.vivalink.com
+  tags:
+  - Vital Signs
+  properties:
+  - type: OpenAPI
+    url: openapi/vivalink-vital-signs-api-openapi.yml
+  - type: Documentation
+    url: https://www.vivalink.com/vivalink-sdk
+  - type: Documentation
+    url: https://www.vivalink.com/vitals-data-services
+  - type: PostmanCollection
+    url: collections/vivalink.postman_collection.json
+  - type: OpenCollection
+    url: collections/vivalink.opencollection.json
+  - type: Documentation
+    url: https://www.vivalink.com/wearable-products
+  - type: Documentation
+    url: >-
+      https://aws.amazon.com/blogs/apn/next-gen-patient-monitoring-with-vivalinks-intelligent-biometrics-platform-and-aws/
+- aid: vivalink:vivalink-webhooks-api
+  name: VivaLNK Webhooks API
+  description: Subscriptions for pushed biometric data and alert events.
+  humanURL: https://www.vivalink.com/vitals-data-services
+  baseURL: https://api.vivalink.com
+  tags:
+  - Webhooks
+  properties:
+  - type: OpenAPI
+    url: openapi/vivalink-webhooks-api-openapi.yml
+  - type: Documentation
+    url: https://www.vivalink.com/vivalink-sdk
+  - type: Documentation
+    url: https://www.vivalink.com/vitals-data-services
+  - type: PostmanCollection
+    url: collections/vivalink.postman_collection.json
+  - type: OpenCollection
+    url: collections/vivalink.opencollection.json
+  - type: Documentation
+    url: https://www.vivalink.com/wearable-products
+  - type: Documentation
+    url: >-
+      https://aws.amazon.com/blogs/apn/next-gen-patient-monitoring-with-vivalinks-intelligent-biometrics-platform-and-aws/
 common:
 - type: AgenticAccess
   url: agentic-access/vivalink-agentic-access.yml
