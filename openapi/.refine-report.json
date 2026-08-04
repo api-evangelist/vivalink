@@ -1,0 +1,22 @@
+{
+  "provider": "vivalink",
+  "sources": [
+    "vivalink-devices-api-openapi.yml",
+    "vivalink-fhir-api-openapi.yml",
+    "vivalink-subjects-api-openapi.yml",
+    "vivalink-vital-signs-api-openapi.yml",
+    "vivalink-webhooks-api-openapi.yml"
+  ],
+  "outputs": [
+    "vivalink-devices-api-openapi.yml",
+    "vivalink-fhir-api-openapi.yml",
+    "vivalink-subjects-api-openapi.yml",
+    "vivalink-vital-signs-api-openapi.yml",
+    "vivalink-webhooks-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
