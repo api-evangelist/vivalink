@@ -1,0 +1,126 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "VivaLNK Biometrics Data Platform API (Modeled) Devices Subjects API",
+    "version": "1.0-modeled"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Subjects",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List subjects",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.vivalink.com/v1/subjects",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "query",
+                "description": "Filter subjects by project or study."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Lists subjects enrolled in your account, project, or study (modeled)."
+        },
+        {
+          "info": {
+            "name": "Create a subject",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.vivalink.com/v1/subjects",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Enrolls a new subject for monitoring (modeled)."
+        },
+        {
+          "info": {
+            "name": "Retrieve a subject",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.vivalink.com/v1/subjects/:subjectId",
+            "params": [
+              {
+                "name": "subjectId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve a subject"
+        },
+        {
+          "info": {
+            "name": "Update a subject",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.vivalink.com/v1/subjects/:subjectId",
+            "params": [
+              {
+                "name": "subjectId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a subject"
+        },
+        {
+          "info": {
+            "name": "Deactivate a subject",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.vivalink.com/v1/subjects/:subjectId",
+            "params": [
+              {
+                "name": "subjectId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Deactivate a subject"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

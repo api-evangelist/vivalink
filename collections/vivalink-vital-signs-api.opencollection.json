@@ -1,0 +1,85 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "VivaLNK Biometrics Data Platform API (Modeled) Devices Vital Signs API",
+    "version": "1.0-modeled"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Vital Signs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve subject measurements",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.vivalink.com/v1/subjects/:subjectId/measurements",
+            "params": [
+              {
+                "name": "subjectId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "metric",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "start",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "end",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "interval",
+                "value": "",
+                "type": "query",
+                "description": "Aggregation interval (raw, 1m, 5m, 1h). Omit for raw samples."
+              }
+            ]
+          },
+          "docs": "Returns time-ranged biometric measurements for a subject - ECG-derived heart rate, HRV, RR interval, respiratory rate, temperature, SpO2, blood pressure, and accelerometer/activity data (modeled). Near-real-time results are served over REST (backed by Amazon Kinesis), not a public streaming socket."
+        },
+        {
+          "info": {
+            "name": "Request a bulk data-file export",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.vivalink.com/v1/subjects/:subjectId/exports",
+            "params": [
+              {
+                "name": "subjectId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Requests a bulk export (for example CSV/EDF) of a subject's raw biometric data over a time range for retrospective analysis (modeled)."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

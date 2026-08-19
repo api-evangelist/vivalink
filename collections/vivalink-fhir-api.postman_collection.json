@@ -1,0 +1,152 @@
+{
+  "item": [
+    {
+      "id": "13cb68f7-f0d7-4e06-89d0-61ced95a0232",
+      "name": "FHIR",
+      "description": {
+        "content": "HL7 FHIR R4 resources for EHR/CTMS interoperability.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "0618599e-f243-4d4c-9c07-e49352d277e8",
+          "name": "Search FHIR Observations",
+          "request": {
+            "name": "Search FHIR Observations",
+            "description": {
+              "content": "Returns biometric measurements as HL7 FHIR R4 Observation resources for EHR/CTMS interoperability (modeled). FHIR support is a documented VivaLNK Biometrics Data Platform capability.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fhir",
+                "Observation"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "patient",
+                  "value": "<string>",
+                  "description": "FHIR Patient reference or subject identifier."
+                },
+                {
+                  "disabled": false,
+                  "key": "code",
+                  "value": "<string>",
+                  "description": "LOINC code for the vital sign."
+                },
+                {
+                  "disabled": false,
+                  "key": "date",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/fhir+json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "faae27a3-43e1-48cd-b294-d011fcb69594",
+              "name": "A FHIR Bundle of Observation resources.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fhir",
+                    "Observation"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "patient",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "date",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/fhir+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/fhir+json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.vivalink.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "985a53ca-c734-4d11-a0e7-7582ae105dcc",
+    "name": "VivaLNK Biometrics Data Platform API (Modeled) Devices FHIR API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "A modeled OpenAPI description of the VivaLNK (Vivalink) Biometrics Data Platform cloud API for remote patient monitoring. VivaLNK provides medical-grade wearable biosensors (Multi-Vital ECG patch, temperature patch, SpO2 sensor, BP cuff) and a cloud platform that ingests their data over RESTful HTTPS services (Amazon API Gateway plus Amazon Kinesis for near-real-time ingestion) and makes it available for machine-to-machine (M2M) integration, webhook push, FHIR interoperability, and bulk file export.\nIMPORTANT: VivaLNK's developer surface is delivered through its SDK and Developer Program and is partner-gated - the full API reference is provided under license rather than published openly. The paths, base URL, request parameters, and schemas below are MODELED from VivaLNK's documented platform capabilities (M2M cloud web services, webhook support, FHIR support, data-file downloads) and are NOT copied from a public reference. Field names, the exact base URL, and authentication scheme must be confirmed against VivaLNK's licensed documentation before use.\n\nContact Support:\n Name: VivaLNK (Vivalink)",
+      "type": "text/plain"
+    }
+  }
+}

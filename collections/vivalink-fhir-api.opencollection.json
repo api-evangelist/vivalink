@@ -1,0 +1,54 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "VivaLNK Biometrics Data Platform API (Modeled) Devices FHIR API",
+    "version": "1.0-modeled"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "FHIR",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search FHIR Observations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.vivalink.com/fhir/Observation",
+            "params": [
+              {
+                "name": "patient",
+                "value": "",
+                "type": "query",
+                "description": "FHIR Patient reference or subject identifier."
+              },
+              {
+                "name": "code",
+                "value": "",
+                "type": "query",
+                "description": "LOINC code for the vital sign."
+              },
+              {
+                "name": "date",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns biometric measurements as HL7 FHIR R4 Observation resources for EHR/CTMS interoperability (modeled). FHIR support is a documented VivaLNK Biometrics Data Platform capability."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

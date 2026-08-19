@@ -1,0 +1,372 @@
+{
+  "item": [
+    {
+      "id": "58ee6354-6463-45c5-8441-9723d2e204b3",
+      "name": "Vital Signs",
+      "description": {
+        "content": "Biometric measurements captured from wearables.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "1826adb7-c8b3-4ef0-a066-e1696b2ef17c",
+          "name": "Retrieve subject measurements",
+          "request": {
+            "name": "Retrieve subject measurements",
+            "description": {
+              "content": "Returns time-ranged biometric measurements for a subject - ECG-derived heart rate, HRV, RR interval, respiratory rate, temperature, SpO2, blood pressure, and accelerometer/activity data (modeled). Near-real-time results are served over REST (backed by Amazon Kinesis), not a public streaming socket.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "subjects",
+                ":subjectId",
+                "measurements"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "metric",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "start",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "end",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "interval",
+                  "value": "<string>",
+                  "description": "Aggregation interval (raw, 1m, 5m, 1h). Omit for raw samples."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "subjectId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1e897873-ece6-4629-8c60-ec269bef3dff",
+              "name": "A time series of measurements.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "subjects",
+                    ":subjectId",
+                    "measurements"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "metric",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "start",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "end",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "interval",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subjectId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"subjectId\": \"string\",\n  \"metric\": \"string\",\n  \"unit\": \"string\",\n  \"samples\": [\n    {\n      \"timestamp\": \"1979-07-15T16:16:48.901Z\",\n      \"value\": 3066.9625804838342,\n      \"deviceId\": \"string\"\n    },\n    {\n      \"timestamp\": \"1950-09-13T08:37:55.036Z\",\n      \"value\": 5289.397360171482,\n      \"deviceId\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4ee8beba-b567-4e9f-80bd-e042b2326b37",
+              "name": "Missing or invalid credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "subjects",
+                    ":subjectId",
+                    "measurements"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "metric",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "start",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "end",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "interval",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subjectId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "72f97395-b2b6-4c6c-8150-f4ebc8652930",
+          "name": "Request a bulk data-file export",
+          "request": {
+            "name": "Request a bulk data-file export",
+            "description": {
+              "content": "Requests a bulk export (for example CSV/EDF) of a subject's raw biometric data over a time range for retrospective analysis (modeled).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "subjects",
+                ":subjectId",
+                "exports"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "subjectId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"start\": \"<dateTime>\",\n  \"end\": \"<dateTime>\",\n  \"format\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9f61e3cc-5370-4b09-ae16-7a837a3924a0",
+              "name": "Export accepted; poll or await a webhook for completion.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "subjects",
+                    ":subjectId",
+                    "exports"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subjectId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"start\": \"<dateTime>\",\n  \"end\": \"<dateTime>\",\n  \"format\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"status\": \"processing\",\n  \"downloadUrl\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.vivalink.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "376b347a-8760-4cac-8c95-309d013d8393",
+    "name": "VivaLNK Biometrics Data Platform API (Modeled) Devices Vital Signs API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "A modeled OpenAPI description of the VivaLNK (Vivalink) Biometrics Data Platform cloud API for remote patient monitoring. VivaLNK provides medical-grade wearable biosensors (Multi-Vital ECG patch, temperature patch, SpO2 sensor, BP cuff) and a cloud platform that ingests their data over RESTful HTTPS services (Amazon API Gateway plus Amazon Kinesis for near-real-time ingestion) and makes it available for machine-to-machine (M2M) integration, webhook push, FHIR interoperability, and bulk file export.\nIMPORTANT: VivaLNK's developer surface is delivered through its SDK and Developer Program and is partner-gated - the full API reference is provided under license rather than published openly. The paths, base URL, request parameters, and schemas below are MODELED from VivaLNK's documented platform capabilities (M2M cloud web services, webhook support, FHIR support, data-file downloads) and are NOT copied from a public reference. Field names, the exact base URL, and authentication scheme must be confirmed against VivaLNK's licensed documentation before use.\n\nContact Support:\n Name: VivaLNK (Vivalink)",
+      "type": "text/plain"
+    }
+  }
+}
