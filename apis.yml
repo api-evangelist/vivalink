@@ -146,6 +146,8 @@ apis:
   humanURL: https://www.vivalink.com/vitals-data-services
   baseURL: https://api.vivalink.com
   tags:
+  - Webhook
+  tags_raw:
   - Webhooks
   properties:
   - type: OpenAPI
