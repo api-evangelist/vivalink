@@ -178,6 +178,9 @@ apis:
     url: >-
       https://aws.amazon.com/blogs/apn/next-gen-patient-monitoring-with-vivalinks-intelligent-biometrics-platform-and-aws/
 common:
+- type: CapabilityMap
+  url: capabilities/vivalink-capability-edges.yml
+  name: VivaLNK Business Capability Map
 - type: AgenticAccess
   url: agentic-access/vivalink-agentic-access.yml
 - type: DomainSecurity
