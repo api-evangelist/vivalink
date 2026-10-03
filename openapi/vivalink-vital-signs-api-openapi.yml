@@ -122,16 +122,6 @@ paths:
                 $ref: '#/components/schemas/Export'
 components:
   schemas:
-    Measurement:
-      type: object
-      properties:
-        timestamp:
-          type: string
-          format: date-time
-        value:
-          type: number
-        deviceId:
-          type: string
     Error:
       type: object
       properties:
@@ -155,6 +145,16 @@ components:
           type:
           - string
           - 'null'
+    Measurement:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          format: date-time
+        value:
+          type: number
+        deviceId:
+          type: string
   responses:
     Unauthorized:
       description: Missing or invalid credentials.

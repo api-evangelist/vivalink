@@ -84,20 +84,6 @@ paths:
           description: Subscription deleted.
 components:
   schemas:
-    Webhook:
-      type: object
-      properties:
-        id:
-          type: string
-        url:
-          type: string
-          format: uri
-        events:
-          type: array
-          items:
-            type: string
-        active:
-          type: boolean
     WebhookInput:
       type: object
       required:
@@ -118,6 +104,20 @@ components:
             - export.complete
         secret:
           type: string
+    Webhook:
+      type: object
+      properties:
+        id:
+          type: string
+        url:
+          type: string
+          format: uri
+        events:
+          type: array
+          items:
+            type: string
+        active:
+          type: boolean
   securitySchemes:
     bearerAuth:
       type: http
