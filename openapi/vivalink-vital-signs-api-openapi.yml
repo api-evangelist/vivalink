@@ -121,13 +121,23 @@ paths:
               schema:
                 $ref: '#/components/schemas/Export'
 components:
+  responses:
+    Unauthorized:
+      description: Missing or invalid credentials.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
-    Error:
+    Measurement:
       type: object
       properties:
-        code:
+        timestamp:
           type: string
-        message:
+          format: date-time
+        value:
+          type: number
+        deviceId:
           type: string
     Export:
       type: object
@@ -145,23 +155,13 @@ components:
           type:
           - string
           - 'null'
-    Measurement:
+    Error:
       type: object
       properties:
-        timestamp:
+        code:
           type: string
-          format: date-time
-        value:
-          type: number
-        deviceId:
+        message:
           type: string
-  responses:
-    Unauthorized:
-      description: Missing or invalid credentials.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   securitySchemes:
     bearerAuth:
       type: http
